@@ -27,7 +27,7 @@
       maxZoom: 19,
     }).addTo(map);
 
-    // Basemap Citra
+    // Basemap ESRI
     const imagery = L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
     );
@@ -40,7 +40,7 @@
 
     L.control.layers(baseMaps).addTo(map);
 
-    // Popup koordinat ketika klik
+    // Popup koordinat
     map.on("click", (e) => {
       L.popup()
         .setLatLng(e.latlng)
@@ -51,7 +51,7 @@
     // ======================================================
     // LOAD DATA GEOJSON (BIDANG TANAH)
     // ======================================================
-    fetch("bidangtanah.geojson")
+    fetch("../bidangtanah.geojson")   // ← PATH SUDAH BENAR UNTUK STRUKTUR REPO KAMU
       .then(res => res.json())
       .then(data => {
         L.geoJSON(data, {
@@ -63,13 +63,12 @@
             const p = feature.properties || {};
             layer.bindPopup(`
               <b>ID:</b> ${p.id || "-"}<br>
-              <b>NIB:</b> ${p.NIB || "-"}<br>
+              <b>NIB:</b> ${p.NIB || "-"}
             `);
           }
         }).addTo(map);
       })
       .catch(err => console.log("Gagal load GeoJSON:", err));
-
   </script>
 </body>
 </html>
