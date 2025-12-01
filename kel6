@@ -51,7 +51,7 @@
     // ======================================================
     // LOAD DATA GEOJSON (BIDANG TANAH)
     // ======================================================
-    fetch("data/bidangtanah.geojson")
+    fetch("bidangtanah.geojson")
       .then(res => res.json())
       .then(data => {
         L.geoJSON(data, {
