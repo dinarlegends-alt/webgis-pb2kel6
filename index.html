@@ -48,27 +48,18 @@
         .openOn(map);
     });
 
-    // ======================================================
-    // LOAD DATA GEOJSON (BIDANG TANAH)
-    // ======================================================
-    fetch("../bidangtanah.geojson")   // ← PATH SUDAH BENAR UNTUK STRUKTUR REPO KAMU
-      .then(res => res.json())
-      .then(data => {
-        L.geoJSON(data, {
-          style: {
-            color: "red",
-            weight: 2
-          },
-          onEachFeature: (feature, layer) => {
-            const p = feature.properties || {};
-            layer.bindPopup(`
-              <b>ID:</b> ${p.id || "-"}<br>
-              <b>NIB:</b> ${p.NIB || "-"}
-            `);
-          }
-        }).addTo(map);
-      })
-      .catch(err => console.log("Gagal load GeoJSON:", err));
-  </script>
-</body>
-</html>
+   fetch("bidangtanah.geojson")
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: { color: "red", weight: 2 },
+      onEachFeature: (feature, layer) => {
+        const p = feature.properties || {};
+        layer.bindPopup(`
+          <b>ID:</b> ${p.id || "-"}<br>
+          <b>NIB:</b> ${p.NIB || "-"}
+        `);
+      }
+    }).addTo(map);
+  })
+  .catch(err => console.log("Gagal load GeoJSON:", err));
