@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -17,19 +15,24 @@
 <body>
   <div id="map"></div>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
   <script>
+    // Inisialisasi peta
     const map = L.map("map").setView([-6.2406, 107.0006], 13);
 
+    // Basemap OSM
     const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
       maxZoom: 19,
     }).addTo(map);
 
+    // Basemap Citra
     const imagery = L.tileLayer(
       "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
     );
 
+    // Control basemap
     const baseMaps = {
       "OSM (Default)": osm,
       "Esri Imagery": imagery,
@@ -37,29 +40,36 @@
 
     L.control.layers(baseMaps).addTo(map);
 
+    // Popup koordinat ketika klik
     map.on("click", (e) => {
       L.popup()
         .setLatLng(e.latlng)
         .setContent("Lat: " + e.latlng.lat + "<br>Lng: " + e.latlng.lng)
         .openOn(map);
     });
+
+    // ======================================================
+    // LOAD DATA GEOJSON (BIDANG TANAH)
+    // ======================================================
+    fetch("data/bidangtanah.geojson")
+      .then(res => res.json())
+      .then(data => {
+        L.geoJSON(data, {
+          style: {
+            color: "red",
+            weight: 2
+          },
+          onEachFeature: (feature, layer) => {
+            const p = feature.properties || {};
+            layer.bindPopup(`
+              <b>ID:</b> ${p.id || "-"}<br>
+              <b>NIB:</b> ${p.NIB || "-"}<br>
+            `);
+          }
+        }).addTo(map);
+      })
+      .catch(err => console.log("Gagal load GeoJSON:", err));
+
   </script>
 </body>
 </html>
-fetch("data/bidangtanah.geojson")
-  .then(res => res.json())
-  .then(data => {
-    L.geoJSON(data, {
-      onEachFeature: (feature, layer) => {
-        const p = feature.properties;
-        layer.bindPopup(`
-          <b>ID:</b> ${p.id || "-"}<br>
-          <b>NIB:</b> ${p.NIB || "-"}
-        `);
-      },
-      style: {
-        color: "red",
-        weight: 1
-      }
-    }).addTo(map);
-  });
