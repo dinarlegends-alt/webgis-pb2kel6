@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -44,3 +46,20 @@
   </script>
 </body>
 </html>
+fetch("data/bidangtanah.geojson")
+  .then(res => res.json())
+  .then(data => {
+    L.geoJSON(data, {
+      onEachFeature: (feature, layer) => {
+        const p = feature.properties;
+        layer.bindPopup(`
+          <b>ID:</b> ${p.id || "-"}<br>
+          <b>NIB:</b> ${p.NIB || "-"}
+        `);
+      },
+      style: {
+        color: "red",
+        weight: 1
+      }
+    }).addTo(map);
+  });
