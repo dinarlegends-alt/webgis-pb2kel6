@@ -51,44 +51,40 @@
     // =============================================================
     // LOAD GEOJSON
     // =============================================================
-    fetch("bidangtanah.geojson")
-      .then(res => res.json())
-      .then(data => {
+   fetch("bidangtanah.geojson")
+  .then(res => res.json())
+  .then(data => {
 
-        // Jika GeoJSON kamu adalah GeometryCollection
-        if (data.type === "GeometryCollection") {
+    let fc;
 
-          const fc = {
-            type: "FeatureCollection",
-            features: data.geometries.map((g, i) => ({
-              type: "Feature",
-              properties: {
-                id: i + 1,
-                NIB: "-"
-              },
-              geometry: g
-            }))
-          };
+    if (data.type === "GeometryCollection") {
+      fc = {
+        type: "FeatureCollection",
+        features: data.geometries.map((g, i) => ({
+          type: "Feature",
+          properties: { id: i+1, NIB: "-" },
+          geometry: g
+        }))
+      };
+    } else {
+      fc = data;
+    }
 
-          L.geoJSON(fc, {
-            style: { color: "red", weight: 2 },
-            onEachFeature: (feature, layer) => {
-              const p = feature.properties;
-              layer.bindPopup(`
-                <b>ID:</b> ${p.id}<br>
-                <b>NIB:</b> ${p.NIB}
-              `);
-            }
-          }).addTo(map);
+    const layer = L.geoJSON(fc, {
+      style: { 
+        color: "yellow", 
+        weight: 4,
+        opacity: 1
+      },
+      onEachFeature: (feature, layer) => {
+        layer.bindPopup(`
+          <b>ID:</b> ${feature.properties.id}<br>
+          <b>NIB:</b> ${feature.properties.NIB}
+        `);
+      }
+    }).addTo(map);
 
-        } else {
-          // Jika formatnya sudah FeatureCollection
-          L.geoJSON(data).addTo(map);
-        }
+    map.fitBounds(layer.getBounds());
 
-      })
-      .catch(err => console.log("Gagal load GeoJSON:", err));
-
-  </script>
-</body>
-</html>
+  })
+  .catch(err => console.log("Gagal load GeoJSON:", err));
