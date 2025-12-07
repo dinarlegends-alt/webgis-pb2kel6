@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <title>WebGIS PB2 – Dashboard Nilai Tanah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+
+  <div id="header">PETA PREDIKSI NILAI TANAH – KELOMPOK 6</div>
+
+  <div id="main">
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+      <div id="sidebarHeader">
+        <span>DASHBOARD</span>
+        <span id="toggleSidebar" class="arrow">⮜</span>
+      </div>
+
+      <div class="section">
+        <h3>KECAMATAN</h3>
+        <ul id="listKecamatan"></ul>
+      </div>
+
+      <div class="section">
+        <h3>ZONA NILAI TANAH</h3>
+        <ul id="listZona"></ul>
+      </div>
+    </div>
+
+    <!-- MAP -->
+    <div id="map"></div>
+
+    <!-- PANEL DETAIL -->
+    <div id="detailPanel" class="hidden">
+      <div id="detailHeader">
+        <span id="detailTitle">Detail</span>
+        <span id="detailClose">&times;</span>
+      </div>
+
+      <div id="detailContent"></div>
+
+      <hr>
+
+      <h4>Form Rating</h4>
+      <div id="ratingInfo"></div>
+
+      <label>Nama Penilai</label>
+      <input type="text" id="namaPenilai">
+
+      <label>Pekerjaan</label>
+      <input type="text" id="pekerjaanPenilai">
+
+      <label>Rating NBT (1–5)</label>
+      <input type="number" id="ratingNBT" min="1" max="5">
+
+      <label>Rating NJOP Prediksi (1–5)</label>
+      <input type="number" id="ratingNJOP" min="1" max="5">
+
+      <div class="btnRow">
+        <button class="btn cancel" id="btnBatal">Batal</button>
+        <button class="btn submit" id="btnSubmit">Submit</button>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
