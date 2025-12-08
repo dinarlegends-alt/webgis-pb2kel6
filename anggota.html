@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tim Penyusun – WebGIS Nilai Tanah</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #ffb74d 0, #8c2f03 40%, #1b0c06 85%);
+      color: #fff3e0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 14px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(24, 9, 4, 0.8);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+    .title {
+      font-weight: 600;
+      font-size: 18px;
+    }
+    .btn-back {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.8);
+      color: #ffe0b2;
+      text-decoration: none;
+      font-size: 13px;
+    }
+    .btn-back:hover {
+      background: rgba(0,0,0,0.3);
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .wrap {
+      max-width: 960px;
+      width: 100%;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 26px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #ffebc9;
+      margin-bottom: 24px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: rgba(22, 9, 4, 0.9);
+      border-radius: 16px;
+      padding: 18px 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      font-size: 13px;
+    }
+    .card h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+    .badge-role {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: rgba(255,193,7,0.15);
+      border: 1px solid rgba(255,213,79,0.6);
+      color: #ffe082;
+      margin-bottom: 8px;
+    }
+    .card p {
+      margin: 2px 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 14px;
+      font-size: 12px;
+      color: #ffccbc;
+      background: rgba(12,4,2,0.9);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="title">Tim Penyusun – WebGIS Nilai Tanah</div>
+    <a href="index.html" class="btn-back">← Kembali ke Beranda</a>
+  </header>
+
+  <main class="main">
+    <div class="wrap">
+      <h1>Kelompok 6 Penilaian Tanah Properti</h1>
+      <div class="subtitle">
+        Pengembangan WebGIS nilai tanah di Kelurahan Kapas Madya Baru, Kecamatan Tambaksari.
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <span class="badge-role">Koordinator & Penyusun Data</span>
+          <h3>Thufail 'Amru Ad Dausi</h3>
+          <p><b>NRP:</b> 5016221017</p>
+          <p>Bertanggung jawab pada pengumpulan data bidang tanah dan penyusunan dokumen penilaian.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge-role">Analisis Spasial & Parameter</span>
+          <h3>Racka Ichwan Zamora</h3>
+          <p><b>NRP:</b> 5016221097</p>
+          <p>Menyusun parameter jarak ke fasilitas umum, skor lingkungan, dan integrasi analisis SIG.</p>
+        </div>
+
+        <div class="card">
+          <span class="badge-role">Pengolahan Nilai Tanah dan Penyusunan WebGIS</span>
+          <h3>Dinar Haryadi</h3>
+          <p><b>NRP:</b> 5016221108</p>
+          <p>Bertugas mengolah nilai tanah, dan Membuat dan publikasi WebGIS</p>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    WebGIS Nilai Tanah – Kapas Madya Baru · Kelompok 6
+  </footer>
+</body>
+</html>
