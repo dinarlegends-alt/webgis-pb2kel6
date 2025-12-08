@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <title>WebGIS Nilai Tanah – Kelompok 6</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
+      scroll-behavior: smooth;
+      background: #1b0c06;
+      color: #fff;
+    }
+
+    /* NAVBAR */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: linear-gradient(90deg, #8c2f03, #b54a0d);
+      padding: 10px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    .nav-left {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: .5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-left span.logo {
+      display: inline-flex;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: #ffca28;
+      align-items: center;
+      justify-content: center;
+      color: #5d2100;
+      font-weight: 700;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 26px;
+      font-size: 14px;
+    }
+    .nav-menu a {
+      color: #ffece0;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+    }
+    .nav-menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: #ffcc80;
+      transition: width .2s;
+    }
+    .nav-menu a:hover::after {
+      width: 100%;
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 75vh;
+      padding: 60px 40px 40px;
+      background: radial-gradient(circle at top left, #ffb74d 0, #8c2f03 40%, #1b0c06 85%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-inner {
+      max-width: 1080px;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(4px);
+    }
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #76ff03;
+    }
+    .hero-title {
+      font-size: 40px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 16px 0 8px;
+    }
+    .hero-subtitle {
+      font-size: 22px;
+      font-weight: 500;
+      color: #ffe0b2;
+      margin-bottom: 12px;
+    }
+    .hero-desc {
+      font-size: 14px;
+      max-width: 520px;
+      color: #ffecb3;
+      margin-bottom: 24px;
+    }
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .btn {
+      border-radius: 999px;
+      border: none;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform .1s, box-shadow .15s, background .2s, color .2s;
+    }
+    .btn-primary {
+      background: #3e1d09;
+      color: #ffe0b2;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+    }
+    .btn-primary:hover {
+      background: #5a2a0c;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid rgba(255,236,179,0.8);
+      color: #ffecb3;
+    }
+    .btn-outline:hover {
+      background: rgba(0,0,0,0.35);
+    }
+
+    .hero-card {
+      background: rgba(18,7,2,0.7);
+      border-radius: 18px;
+      padding: 20px 22px;
+      color: #ffe8c2;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      font-size: 13px;
+    }
+    .hero-card h3 {
+      margin-top: 0;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .hero-card ul {
+      padding-left: 18px;
+      margin: 4px 0 0;
+    }
+
+    /* SECTION GENERIC */
+    .section {
+      padding: 40px 40px 20px;
+      background: #1b0c06;
+    }
+    .section-alt {
+      background: radial-gradient(circle at top, #4e1f05 0, #1b0c06 60%);
+    }
+    .section-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ffe0b2;
+      border-left: 4px solid #ffb74d;
+      padding-left: 10px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 30px;
+    }
+    .text-block {
+      font-size: 14px;
+      color: #ffddc1;
+      line-height: 1.6;
+    }
+    .text-block p {
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    .list {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+    .list li { margin-bottom: 6px; }
+
+    .card-soft {
+      background: rgba(38,17,7,0.9);
+      border-radius: 16px;
+      padding: 18px 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+      font-size: 13px;
+      color: #ffe8c2;
+    }
+    .card-soft h4 {
+      margin: 0 0 6px;
+      font-size: 14px;
+    }
+
+    .footer {
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 12px;
+      color: #ffccbc;
+      background: #120805;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 900px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .hero {
+        padding: 40px 24px 30px;
+      }
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .section, .section-alt {
+        padding: 30px 24px 16px;
+      }
+      .section-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-left">
+      <span class="logo">K6</span>
+      <span>WebGIS Nilai Tanah – Kapas Madya Baru</span>
+    </div>
+    <div class="nav-menu">
+      <a href="#beranda">Beranda</a>
+      <a href="#latar">Latar Belakang</a>
+      <a href="#rumusan">Rumusan Masalah</a>
+      <a href="#tujuan">Tujuan</a>
+      <a href="#manfaat">Manfaat</a>
+      <a href="#parameter">Parameter</a>
+      <a href="peta.html">Peta Interaktif</a>
+      <a href="anggota.html">Tim</a>
+    </div>
+  </nav>
+
+  <!-- HERO / BERANDA -->
+  <section id="beranda" class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Project Based – Penilaian Tanah Properti</span>
+        </div>
+        <h1 class="hero-title">Sistem Informasi Nilai Tanah<br />Kapas Madya Baru, Tambaksari</h1>
+        <div class="hero-subtitle">
+          WebGIS interaktif untuk eksplorasi zona nilai tanah dan kondisi lingkungan.
+        </div>
+        <p class="hero-desc">
+          Portal ini menyajikan peta nilai tanah berbasis SIG yang mengintegrasikan data bidang tanah,
+          jarak ke fasilitas umum, serta parameter kerentanan banjir di Kelurahan Kapas Madya Baru.
+        </p>
+        <div class="hero-buttons">
+          <a href="peta.html" class="btn btn-primary">🗺️ Mulai Peta Interaktif</a>
+          <a href="anggota.html" class="btn btn-outline">👥 Lihat Tim Penyusun</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Ringkasan Singkat</h3>
+        <p>
+          Nilai tanah berubah cepat seiring perkembangan kota, infrastruktur, dan pasar properti.
+          Tanpa sistem yang terstruktur, informasi ini tersebar di banyak dokumen dan sulit
+          dimanfaatkan untuk pengambilan keputusan.
+        </p>
+        <ul>
+          <li>Integrasi data spasial & atribut bidang tanah</li>
+          <li>Visualisasi zona nilai tanah dalam kelas rupiah per meter</li>
+          <li>Analisis kedekatan terhadap fasilitas pendidikan, kesehatan, dan pemerintahan</li>
+          <li>Memanfaatkan WebGIS agar dapat diakses publik secara mudah</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- LATAR & RUMUSAN -->
+  <section id="latar" class="section section-alt">
+    <div class="section-inner">
+      <div class="section-grid">
+        <div class="text-block">
+          <div class="section-title">Latar Belakang</div>
+          <p>
+            Informasi nilai tanah merupakan komponen penting dalam penetapan pajak, jaminan kredit,
+            penentuan harga pasar, hingga perencanaan pembangunan. Di banyak wilayah, data tersebut
+            masih tersimpan dalam dokumen terpisah dan dikelola secara konvensional sehingga
+            proses penilaian menjadi lambat dan kurang konsisten antarwilayah maupun antarperiode.
+          </p>
+          <p>
+            Perkembangan kota, perubahan penggunaan lahan, dan pembangunan infrastruktur membuat
+            nilai tanah berubah relatif cepat. Kondisi ini menuntut adanya sistem yang mampu
+            menyediakan informasi nilai tanah yang mutakhir, terstruktur, dan mudah diakses oleh
+            pemerintah, penilai, pelaku usaha, maupun masyarakat.
+          </p>
+          <p>
+            Teknologi Sistem Informasi Geografis (SIG) dan WebGIS memungkinkan integrasi data spasial
+            dan atribut, analisis pola keruangan, serta visualisasi peta tematik secara interaktif.
+            Dengan pendekatan ini, nilai tanah tidak hanya berupa angka, tetapi dapat dipahami
+            sebagai fenomena spasial yang memiliki pola, struktur, dan logika keruangan.
+          </p>
+        </div>
+
+        <div id="rumusan" class="card-soft">
+          <h4>Rumusan Masalah</h4>
+          <ol class="list">
+            <li>
+              Bagaimana kondisi pengelolaan dan penyajian informasi nilai tanah saat ini,
+              ditinjau dari ketersediaan, kemutakhiran, dan kemudahan akses data bagi pihak
+              yang membutuhkan?
+            </li>
+            <li>
+              Bagaimana merancang sistem informasi penilaian tanah berbasis web yang terintegrasi
+              dengan SIG untuk mengelola dan menyajikan data nilai tanah di kawasan Kapas Madya, Surabaya?
+            </li>
+            <li>
+              Bagaimana memvisualisasikan informasi nilai tanah dalam bentuk peta tematik dan
+              dasbor interaktif sehingga pola persebaran nilai tanah dapat dipahami dengan jelas oleh pengguna?
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TUJUAN & MANFAAT -->
+  <section id="tujuan" class="section">
+    <div class="section-inner section-grid">
+      <div class="card-soft">
+        <div class="section-title">Tujuan</div>
+        <ol class="list">
+          <li>
+            Menganalisis kondisi pengelolaan dan penyajian informasi nilai tanah yang sudah ada,
+            baik dari sisi ketersediaan, kemutakhiran, maupun kemudahan akses bagi pemangku kepentingan.
+          </li>
+          <li>
+            Merancang dan membangun sistem informasi penilaian tanah berbasis web yang terintegrasi
+            dengan SIG untuk kawasan Kapas Madya, Surabaya.
+          </li>
+          <li>
+            Menyajikan informasi nilai tanah dalam bentuk peta tematik dan dasbor interaktif agar pola
+            persebaran nilai tanah dapat ditampilkan dan dipahami dengan lebih mudah.
+          </li>
+        </ol>
+      </div>
+
+      <div id="manfaat" class="card-soft">
+        <div class="section-title">Manfaat</div>
+        <ol class="list">
+          <li>
+            Menjadi referensi dan bahan bacaan bagi mahasiswa atau peneliti yang mempelajari
+            penilaian tanah dan penerapan SIG dalam penyajian informasi nilai tanah.
+          </li>
+          <li>
+            Menunjukkan contoh penerapan SIG dan aplikasi web untuk mengolah dan menampilkan data
+            nilai tanah dalam bentuk peta dan grafik.
+          </li>
+          <li>
+            Mendukung transparansi dan kemudahan akses informasi nilai tanah bagi pemerintah
+            dan masyarakat.
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARAMETER -->
+  <section id="parameter" class="section section-alt">
+    <div class="section-inner">
+      <div class="section-title">Parameter yang Digunakan</div>
+      <div class="text-block">
+        <p>
+          Pembangunan WebGIS ini memanfaatkan beberapa parameter utama untuk
+          menyusun skor komposit dan kelas nilai tanah pada setiap bidang:
+        </p>
+        <ul class="list">
+          <li>
+            <b>Jarak ke fasilitas pendidikan</b> – jarak bidang tanah terhadap sekolah
+            di sekitarnya. Semakin dekat ke fasilitas pendidikan, umumnya semakin tinggi
+            potensi nilai tanah.
+          </li>
+          <li>
+            <b>Jarak ke fasilitas kesehatan</b> – kedekatan bidang dengan puskesmas, klinik,
+            dan rumah sakit. Akses kesehatan yang baik menjadi salah satu faktor penentu nilai.
+          </li>
+          <li>
+            <b>Jarak ke fasilitas pemerintahan</b> – kedekatan dengan kantor kelurahan,
+            kecamatan, dan fasilitas pelayanan publik lain.
+          </li>
+          <li>
+            <b>Parameter kerawanan banjir</b> – informasi zona genangan atau kerentanan
+            banjir yang mempengaruhi risiko dan kenyamanan hunian.
+          </li>
+          <li>
+            <b>Skor komposit lingkungan</b> – kombinasi beberapa parameter di atas yang
+            menghasilkan kelas nilai tanah (klass 1–5) dan besaran <i>Nilai_Tnh</i>.
+          </li>
+        </ul>
+        <p>
+          Seluruh parameter tersebut diintegrasikan ke dalam WebGIS agar pengguna dapat
+          menelusuri nilai tanah sekaligus memahami konteks lingkungan di sekitar bidang.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    WebGIS Nilai Tanah – Kapas Madya Baru · Kelompok 6 Penilaian Tanah Properti
+  </footer>
+</body>
+</html>
