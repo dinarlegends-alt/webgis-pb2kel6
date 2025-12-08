@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Peta Prediksi Nilai Tanah – Kelompok 6</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- WAJIB! TURF JS → untuk cek poligon RW -->
+<script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="topbar">
+    <a href="index.html" class="back-btn">← Beranda</a>
+    <span class="title">Peta Prediksi Nilai Tanah – Kelompok 6</span>
+</div>
+
+<div class="layout">
+
+    <!-- ===================== -->
+    <!-- SIDEBAR KIRI -->
+    <!-- ===================== -->
+    <div class="sidebar">
+        <h3>Filter Peta</h3>
+
+        <label>RW</label>
+        <select id="filterRW"></select>
+        <small>Menyesuaikan layer batas RW.</small>
+
+        <hr>
+
+        <h4>Zona Nilai Tanah</h4>
+        <label><input type="checkbox" class="filterKelas" value="1"> Kelas 1 (0–3 jt)</label><br>
+        <label><input type="checkbox" class="filterKelas" value="2"> Kelas 2 (3–6 jt)</label><br>
+        <label><input type="checkbox" class="filterKelas" value="3"> Kelas 3 (6–10 jt)</label><br>
+        <label><input type="checkbox" class="filterKelas" value="4"> Kelas 4 (10–15 jt)</label><br>
+        <label><input type="checkbox" class="filterKelas" value="5"> Kelas 5 (15 jt+)</label><br>
+
+        <h4>Kondisi</h4>
+        <label><input type="checkbox" class="filterKondisi" value="Baik"> Baik</label><br>
+        <label><input type="checkbox" class="filterKondisi" value="Sedang"> Sedang</label><br>
+        <label><input type="checkbox" class="filterKondisi" value="Kurang"> Kurang</label><br>
+
+        <a href="anggota.html" class="btn">👥 Anggota Kelompok</a>
+    </div>
+
+    <!-- ===================== -->
+    <!-- MAP -->
+    <!-- ===================== -->
+    <div id="map"></div>
+
+    <!-- ===================== -->
+   <!-- PANEL KANAN -->
+<div class="sideinfo">
+
+    <h3>Informasi Nilai Tanah</h3>
+
+    <!-- PETUNJUK -->
+    <div class="note-box">
+        ⚠️ <b>Petunjuk:</b> Pilih filter terlebih dahulu untuk menampilkan peta interaktif.
+    </div>
+
+    <div class="box">
+        <h4>Ringkasan Data</h4>
+        Jumlah Bidang: <span id="statJumlah">-</span><br>
+        Min NBT: <span id="statMin">-</span><br>
+        Max NBT: <span id="statMax">-</span><br>
+        Rata-rata: <span id="statAvg">-</span>
+    </div>
+
+    <div class="box">
+        <h4>Detail Bidang</h4>
+        <div id="detailPanel">Klik salah satu bidang untuk melihat detail...</div>
+    </div>
+
+</div>
+
+
+<!-- SCRIPT PETA -->
+<script src="app.js"></script>
+
+</body>
+</html>
