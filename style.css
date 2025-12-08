@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    font-family: Poppins, sans-serif;
+}
+
+/* TOP BAR */
+.topbar {
+    background: #b35400;
+    padding: 12px 20px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-weight: 600;
+}
+
+.back-btn {
+    background: #7a3100;
+    padding: 6px 14px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr 300px;
+    height: calc(100vh - 55px);
+}
+
+/* SIDEBAR KIRI */
+.sidebar {
+    background: #ffe9d8;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.sidebar h3, .sidebar h4 {
+    margin-top: 10px;
+}
+
+.btn {
+    display: block;
+    margin-top: 15px;
+    background: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+/* MAP */
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* PANEL KANAN */
+.sideinfo {
+    background: #fff7e9;
+    padding: 15px;
+    overflow-y: auto;
+}
+
+.box {
+    background: #ffe7c7;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.rw-label {
+    background: #004d40;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.legend {
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 18px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.3);
+}
+
+.legend i {
+    width: 18px;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.9;
+}
+
+.harga-label {
+    background: rgba(255,255,255,0.8);
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #000;
+}
+.note-box {
+    background: #fff3cd;
+    border: 1px solid #ffeeba;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    color: #7a5a00;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
